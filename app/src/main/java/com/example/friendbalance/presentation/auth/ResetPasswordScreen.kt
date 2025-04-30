@@ -3,10 +3,8 @@ package com.example.friendbalance.presentation.auth
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,9 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Password
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
@@ -30,13 +26,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.friendbalance.R
@@ -47,12 +43,10 @@ import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun RegisterScreen(navHostController: NavHostController) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun ResetPasswordScreen(navHostController: NavHostController) {
+    var newPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    var isPasswordShow by remember { mutableStateOf(false) }
+    var isNewPasswordShow by remember { mutableStateOf(false) }
     var isConfirmPasswordShow by remember { mutableStateOf(false) }
     Scaffold { innerPadding ->
         Box(
@@ -76,61 +70,30 @@ fun RegisterScreen(navHostController: NavHostController) {
                     ),
                 )
                 Text(
-                    text = "Register to the ${stringResource(R.string.app_name)}",
+                    text = "Reset Password to the ${stringResource(R.string.app_name)}",
                     style = TextStyle(
                         fontSize = dimensionResource(R.dimen.font_34_x).value.sp,
                         fontWeight = FontWeight.Medium,
+                        textAlign = TextAlign.Center
                     )
                 )
                 Spacer(
                     modifier = Modifier.height(dimensionResource(R.dimen.size_30_x))
                 )
-                Spacer(
-                    modifier = Modifier.height(dimensionResource(R.dimen.size_10_x))
-                )
                 AppTextField(
-                    value = name,
-                    label = stringResource(R.string.name_label),
-                    onValueChange = {
-                        name = it
-                    },
-                    leadingIcon = Icons.Default.Person,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = dimensionResource(R.dimen.size_20_x))
-                )
-                Spacer(
-                    modifier = Modifier.height(dimensionResource(R.dimen.size_10_x))
-                )
-                AppTextField(
-                    value = email,
-                    label = stringResource(R.string.email_label),
-                    keyboardType = KeyboardType.Email,
-                    onValueChange = {
-                        email = it
-                    },
-                    leadingIcon = Icons.Default.Email,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = dimensionResource(R.dimen.size_20_x))
-                )
-                Spacer(
-                    modifier = Modifier.height(dimensionResource(R.dimen.size_10_x))
-                )
-                AppTextField(
-                    value = password,
-                    label = stringResource(R.string.password_label),
+                    value = newPassword,
+                    label = stringResource(R.string.new_password_label),
                     keyboardType = KeyboardType.Password,
                     onValueChange = {
-                        password = it
+                        newPassword = it
                     },
                     leadingIcon = Icons.Default.Password,
-                    isPasswordField = !isPasswordShow,
+                    isPasswordField = !isNewPasswordShow,
                     trailingIcon = {
                         IconButton(onClick = {
-                            isPasswordShow = !isPasswordShow
+                            isNewPasswordShow = !isNewPasswordShow
                         }) {
-                            if (isPasswordShow)
+                            if (isNewPasswordShow)
                                 Icon(Icons.Default.Visibility, contentDescription = null)
                             else
                                 Icon(Icons.Default.VisibilityOff, contentDescription = null)
@@ -170,18 +133,14 @@ fun RegisterScreen(navHostController: NavHostController) {
                     modifier = Modifier.height(dimensionResource(R.dimen.size_30_x))
                 )
                 AppButton(
-                    label = stringResource(R.string.register_label),
+                    label = stringResource(R.string.reset_label),
                     onClick = {
-
+                        navHostController.navigate(Screen.ResetPasswordSuccess.route)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = dimensionResource(R.dimen.size_20_x)),
                 )
-                Spacer(
-                    modifier = Modifier.height(dimensionResource(R.dimen.size_10_x))
-                )
-                LoginHereView(navHostController)
                 Spacer(
                     modifier = Modifier.weight(1f)
                 )
@@ -197,25 +156,4 @@ fun RegisterScreen(navHostController: NavHostController) {
     }
 }
 
-@Composable
-private fun LoginHereView(navHostController: NavHostController) {
-    Row {
-        Text(stringResource(R.string.already_account_label))
-        Box(modifier = Modifier.clickable {
-            navHostController.navigate(Screen.Login.route) {
-                popUpTo(0) {
-                    inclusive = true
-                }
-            }
-        }) {
 
-            Text(
-                " ${stringResource(R.string.login_label)}",
-                style = TextStyle(
-                    color = colorResource(R.color.primary_dark_color),
-                    fontWeight = FontWeight.Bold
-                )
-            )
-        }
-    }
-}

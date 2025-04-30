@@ -17,6 +17,7 @@
     <dimen name="font_22_x">22sp</dimen>
     <dimen name="font_24_x">24sp</dimen>
     <dimen name="font_26_x">26sp</dimen>
+    <dimen name="font_28_x">28sp</dimen>
     <dimen name="font_30_x">30sp</dimen>
     <dimen name="font_32_x">32sp</dimen>
     <dimen name="font_34_x">34sp</dimen>

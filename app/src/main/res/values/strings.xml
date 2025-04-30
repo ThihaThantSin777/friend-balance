@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">FriendBalance</string>
 
+    <string name="name_label">Name</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
+    <string name="new_password_label">New Password</string>
     <string name="confirm_password_label">Confirm Password</string>
 
     <string name="forget_password_label">Forget Password?</string>
@@ -14,8 +16,13 @@
     <string name="login_label">Login</string>
     <string name="register_label">Register</string>
     <string name="send_email">Send Email</string>
+    <string name="reset_label">Reset</string>
+
 
 
     <string name="forget_password_title">Send Email to use for restarting password.</string>
+
+    <string name="reset_password_success_label">Resetting Password is success. Please login with new credentials</string>
+
 
 </resources>

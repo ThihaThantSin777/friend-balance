@@ -27,12 +27,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.friendbalance.R
 import com.example.friendbalance.components.AppButton
 import com.example.friendbalance.components.AppTextField
+import com.example.friendbalance.navigation.Screen
 
 @Composable
-fun ForgetPasswordScreen() {
+fun ForgetPasswordScreen(navHostController: NavHostController) {
     var email by remember { mutableStateOf("") }
     Scaffold { innerPadding ->
         Box(
@@ -57,7 +59,9 @@ fun ForgetPasswordScreen() {
                 Spacer(
                     modifier = Modifier.height(dimensionResource(R.dimen.size_40_x))
                 )
-                Box (modifier = Modifier.fillMaxWidth().padding(horizontal = dimensionResource(R.dimen.size_20_x)),){
+                Box (modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = dimensionResource(R.dimen.size_20_x)),){
                     Text(
                         text = stringResource(R.string.forget_password_title),
                         style = TextStyle(
@@ -83,7 +87,7 @@ fun ForgetPasswordScreen() {
                 AppButton(
                     label = stringResource(R.string.send_email),
                     onClick = {
-
+                        navHostController.navigate(Screen.ResetPassword.route)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
