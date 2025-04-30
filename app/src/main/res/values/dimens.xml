@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Spacer and Padding-->
+    <dimen name="size_10_x">10dp</dimen>
+    <dimen name="size_15_x">15dp</dimen>
+    <dimen name="size_20_x">20dp</dimen>
+    <dimen name="size_25_x">25dp</dimen>
+    <dimen name="size_30_x">30dp</dimen>
+    <dimen name="size_35_x">35dp</dimen>
+    <dimen name="size_40_x">40dp</dimen>
+
+    <!--    FontSize-->
+    <dimen name="font_14_x">14sp</dimen>
+    <dimen name="font_16_x">16sp</dimen>
+    <dimen name="font_18_x">18sp</dimen>
+    <dimen name="font_20_x">20sp</dimen>
+    <dimen name="font_22_x">22sp</dimen>
+    <dimen name="font_24_x">24sp</dimen>
+    <dimen name="font_26_x">26sp</dimen>
+    <dimen name="font_30_x">30sp</dimen>
+    <dimen name="font_32_x">32sp</dimen>
+    <dimen name="font_34_x">34sp</dimen>
+
+
+    <!--    App Specific-->
+    <dimen name="login_app_image_size">150dp</dimen>
+
+</resources>
