@@ -1,6 +1,8 @@
 package com.example.friendbalance.presentation.auth
 
 import android.os.Build
+import android.util.Log
+import android.util.Patterns
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -48,8 +50,17 @@ import java.time.LocalDate
 @Composable
 fun LoginScreen(navHostController: NavHostController) {
     var email by remember { mutableStateOf("") }
+    var emailErrorMessage by remember { mutableStateOf<String?>(null) }
+    val emailRequiredText = stringResource(R.string.email_is_required_text)
+    val invalidEmailText = stringResource(R.string.invalid_email_format_text)
+
+
     var password by remember { mutableStateOf("") }
     var isPasswordShow by remember { mutableStateOf(false) }
+    var passwordErrorMessage by remember { mutableStateOf<String?>(null) }
+    val passwordRequiredText = stringResource(R.string.password_is_required_text)
+    val passwordNeed8CharacterText = stringResource(R.string.password_need_8_characters_text)
+
     Scaffold { innerPadding ->
         Box(
             modifier = Modifier
@@ -86,6 +97,18 @@ fun LoginScreen(navHostController: NavHostController) {
                     keyboardType = KeyboardType.Email,
                     onValueChange = {
                         email = it
+                        emailErrorMessage = when {
+                            it.isBlank() -> emailRequiredText
+                            Patterns.EMAIL_ADDRESS.matcher(it).matches() -> invalidEmailText
+                            else -> null
+                        }
+                        emailErrorMessage = if (email.isEmpty() || email.isBlank()) {
+                            emailRequiredText
+                        } else if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                            invalidEmailText
+                        } else {
+                            null
+                        }
                     },
                     leadingIcon = Icons.Default.Email,
                     modifier = Modifier
@@ -101,6 +124,11 @@ fun LoginScreen(navHostController: NavHostController) {
                     keyboardType = KeyboardType.Password,
                     onValueChange = {
                         password = it
+                        passwordErrorMessage = when {
+                            it.isBlank() -> passwordRequiredText
+                            it.length < 8 -> passwordNeed8CharacterText
+                            else -> null
+                        }
                     },
                     leadingIcon = Icons.Default.Password,
                     isPasswordField = !isPasswordShow,
@@ -144,7 +172,8 @@ fun LoginScreen(navHostController: NavHostController) {
                 AppButton(
                     label = stringResource(R.string.login_label),
                     onClick = {
-
+                        Log.i("emailErrorMessage", emailErrorMessage ?: "")
+                        Log.i("passwordErrorMessage", passwordErrorMessage ?: "")
                     },
                     modifier = Modifier
                         .fillMaxWidth()

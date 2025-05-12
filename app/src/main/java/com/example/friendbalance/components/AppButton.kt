@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.friendbalance.R
 
 @Composable
-fun AppButton(label: String, onClick: () -> Unit, modifier: Modifier) {
+fun AppButton(label: String, onClick: () -> Unit, modifier: Modifier, enabled: Boolean? = true) {
     Button(
         shape = RoundedCornerShape(5.dp),
         colors = ButtonDefaults.buttonColors(
@@ -19,6 +19,7 @@ fun AppButton(label: String, onClick: () -> Unit, modifier: Modifier) {
         ),
         modifier = modifier,
         onClick = onClick,
+        enabled = enabled ?: true,
     ) {
         Text(text = label)
     }

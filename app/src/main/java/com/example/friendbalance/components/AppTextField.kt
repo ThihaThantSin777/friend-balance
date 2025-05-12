@@ -1,7 +1,5 @@
 package com.example.friendbalance.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -9,9 +7,10 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -20,13 +19,14 @@ import com.example.friendbalance.R
 @Composable
 fun AppTextField(
     value: String,
-    onValueChange: (String) -> Unit,
+    onValueChange:(String) -> Unit,
     label: String,
     leadingIcon: ImageVector,
     trailingIcon: @Composable() (() -> Unit)? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordField: Boolean = false,
     modifier: Modifier,
+    errorMessage: String? = null,
 ) {
     OutlinedTextField(
         label = {
@@ -49,5 +49,15 @@ fun AppTextField(
             focusedBorderColor = colorResource(R.color.primary_dark_color),
         ),
         modifier = modifier,
+        isError = !errorMessage.isNullOrEmpty(),
+        supportingText = {
+            if (errorMessage != null) {
+                Text(
+                    errorMessage, style = TextStyle(
+                        color = Color.Red,
+                    )
+                )
+            }
+        }
     )
 }
